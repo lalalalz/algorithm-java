@@ -1,47 +1,72 @@
 package com.company.coupang1;
 
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Solution {
 
-    public void solution(int[][] inputs, int n) {
+    int[] stockStatus = new int[10001];
+    int[][] deliveryStatus = new int[10001][10001];
+    Queue<Integer> queue = new LinkedList<>();
 
-        // 1 : 재고있음
-        // 2 : 재고없음
-        // 3 : 모름
-        int[] result = new int[n + 1];
+    private final int NONE = 0;  // 배송정보 없음
+    private final int NODELIVERY = 1; // 배송 안됨
+    private final int DELIVERY = 2; // 배송 됨
 
-        Arrays.fill(result, 3);
+    private final int UNDETERMINED = 0; // 재고 모름
+    private final int INSTOCK = 1;  // 재고 있음
+    private final int OUTOFSTOCK = 2; // 재고 없음
+
+    public String solution(int[][] inputs, int n) {
 
         for (int[] input : inputs) {
+            int firstNode = input[0];
+            int secondNode = input[1];
+            int deliveryCode = input[2] + 1;
 
-            int firstProduct = input[0];
-            int secondProduct = input[1];
-            int deliveryStatus = input[2];
+            deliveryStatus[firstNode][secondNode] = deliveryCode;
+            deliveryStatus[secondNode][firstNode] = deliveryCode;
 
-            // 배송하지 않음
-            if (deliveryStatus == 0) {
-                if (result[firstProduct] == 3) {
-                    result[firstProduct] = result[secondProduct] == 1 ? 2 : 3;
-                }
-                else if (result[secondProduct] == 3) {
-                    result[secondProduct] = result[firstProduct] == 1 ? 2 : 3;
-                }
-                else {
-                    result[firstProduct] = 3;
-                    result[secondProduct] = 3;
-                }
-            }
-
-            // 배송함
-            else {
-                result[firstProduct] = 1;
-                result[secondProduct] = 1;
+            if (deliveryCode == DELIVERY) {
+                stockStatus[firstNode] = INSTOCK;
+                stockStatus[secondNode] = INSTOCK;
+                queue.add(firstNode);
+                queue.add(secondNode);
             }
         }
 
-        for (int i = 1; i < result.length; ++i) {
-            System.out.println(i + ": " + result[i]);
+        setAnotherNode(n);
+        return generateResult(stockStatus, n);
+    }
+
+    private String generateResult(int[] result, int n) {
+        String generatedResult = "";
+
+        for (int node = 1; node <= n; node++) {
+            if(result[node] == INSTOCK) generatedResult += "O";
+            if(result[node] == OUTOFSTOCK) generatedResult += "X";
+            if(result[node] == UNDETERMINED) generatedResult += "?";
+        }
+
+        return generatedResult;
+    }
+
+    private void setAnotherNode(int n) {
+        while (!queue.isEmpty()) {
+            Integer peekNode = queue.peek();
+            queue.poll();
+
+            for (int anotherNode = 1; anotherNode < n; anotherNode++) {
+                int deliveryCode = deliveryStatus[peekNode][anotherNode];
+
+                if (deliveryCode != NONE && stockStatus[anotherNode] == UNDETERMINED) {
+                    stockStatus[anotherNode] = (deliveryCode == DELIVERY ? INSTOCK : OUTOFSTOCK);
+
+                    if(stockStatus[anotherNode] == INSTOCK){
+                        queue.add(anotherNode);
+                    }
+                }
+            }
         }
     }
 }
