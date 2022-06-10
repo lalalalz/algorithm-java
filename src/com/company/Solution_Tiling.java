@@ -9,10 +9,10 @@ public class Solution_Tiling {
 
     public int solution(int n) {
         int answer = 0;
-        
+
         cacheInit(n);
         answer = tiling(n);
-        
+
         return answer;
     }
 
