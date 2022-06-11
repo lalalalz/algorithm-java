@@ -3,7 +3,7 @@ package com.company.coupang1;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Solution {
+public class Coupang1 {
 
     int[] stockStatus = new int[10001];
     int[][] deliveryStatus = new int[10001][10001];
