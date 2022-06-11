@@ -5,9 +5,9 @@ import java.util.Queue;
 
 public class Coupang1 {
 
-    int[] stockStatus = new int[10001];
-    int[][] deliveryStatus = new int[10001][10001];
-    Queue<Integer> queue = new LinkedList<>();
+    private int[] stockStatus = new int[10001];
+    private int[][] connection = new int[10001][10001];
+    private Queue<Integer> queue = new LinkedList<>();
 
     private final int NONE = 0;  // 배송정보 없음
     private final int NODELIVERY = 1; // 배송 안됨
@@ -24,8 +24,8 @@ public class Coupang1 {
             int secondNode = input[1];
             int deliveryCode = input[2] + 1;
 
-            deliveryStatus[firstNode][secondNode] = deliveryCode;
-            deliveryStatus[secondNode][firstNode] = deliveryCode;
+            connection[firstNode][secondNode] = deliveryCode;
+            connection[secondNode][firstNode] = deliveryCode;
 
             if (deliveryCode == DELIVERY) {
                 stockStatus[firstNode] = INSTOCK;
@@ -39,6 +39,8 @@ public class Coupang1 {
         return generateResult(stockStatus, n);
     }
 
+    // String 불변 객체
+    // StringBuilder(): 단일 쓰레드, StringBuffer(): 멀티 쓰레드, 가변 객체, 확인 필요
     private String generateResult(int[] result, int n) {
         String generatedResult = "";
 
@@ -53,18 +55,20 @@ public class Coupang1 {
 
     private void setAnotherNode(int n) {
         while (!queue.isEmpty()) {
-            Integer peekNode = queue.peek();
-            queue.poll();
+            Integer peekNode = queue.poll(); // 재고가 있는 제품
+            set(n, peekNode);
+        }
+    }
 
-            for (int anotherNode = 1; anotherNode < n; anotherNode++) {
-                int deliveryCode = deliveryStatus[peekNode][anotherNode];
+    private void set(int n, Integer peekNode) {
+        for (int anotherNode = 1; anotherNode < n; anotherNode++) {
+            int deliveryCode = connection[peekNode][anotherNode];
 
-                if (deliveryCode != NONE && stockStatus[anotherNode] == UNDETERMINED) {
-                    stockStatus[anotherNode] = (deliveryCode == DELIVERY ? INSTOCK : OUTOFSTOCK);
+            if (deliveryCode != NONE && stockStatus[anotherNode] == UNDETERMINED) {
+                stockStatus[anotherNode] = (deliveryCode == DELIVERY ? INSTOCK : OUTOFSTOCK);
 
-                    if(stockStatus[anotherNode] == INSTOCK){
-                        queue.add(anotherNode);
-                    }
+                if(stockStatus[anotherNode] == INSTOCK){
+                    queue.add(anotherNode);
                 }
             }
         }

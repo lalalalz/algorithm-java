@@ -11,7 +11,6 @@ public class Coupang3 {
     private int[][] dir = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     public int solution(int[][] board) {
-
         int answer = 0;
 
         map = board;
