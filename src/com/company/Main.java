@@ -4,6 +4,8 @@ import com.company.coupang1.Coupang1;
 import com.company.coupang2.Coupang2;
 import com.company.coupang3.Coupang3;
 import com.company.kakao.friendsBlock.FriendsBlock;
+import com.company.kakao.skillTree.SkillTree;
+import com.company.kakao.skillTree.SkillTree2;
 import com.company.kakao.snail.Snail;
 import com.company.kakao.dividePowerGrid.Solution;
 
@@ -54,10 +56,18 @@ public class Main {
 //        Snail snail = new Snail();
 //        snail.solution(5);
 
-        int[][] input = {{1, 3}, {2, 3}, {3, 4}, {4, 5}, {4, 6}, {4, 7}, {7, 8}, {7, 9}};
-        Solution s = new Solution();
-        int answer = s.solution(9, input);
+//        int[][] input = {{1, 3}, {2, 3}, {3, 4}, {4, 5}, {4, 6}, {4, 7}, {7, 8}, {7, 9}};
+//        Solution s = new Solution();
+//        int answer = s.solution(9, input);
+//
+//        System.out.println("answer = " + answer);
 
+
+        String skill = "CBD";
+        String[] skillTrees = {"BACDE", "CBADF", "AECB", "BDA"};
+
+        SkillTree2 skillTree = new SkillTree2();
+        int answer = skillTree.solution("CBD", skillTrees);
         System.out.println("answer = " + answer);
     }
 }
