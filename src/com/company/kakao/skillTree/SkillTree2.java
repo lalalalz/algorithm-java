@@ -16,13 +16,13 @@ public class SkillTree2 {
     }
 
     private int getRightSkillTreeCount(String skill, String[] skillTrees) {
-        int rightSkillCount = 0;
+        int rightSkillTreeCount = 0;
         for (String skillTree : skillTrees) {
             if (isRightSkillTree(skill, skillTree)) {
-                rightSkillCount++;
+                rightSkillTreeCount++;
             }
         }
-        return rightSkillCount;
+        return rightSkillTreeCount;
     }
 
     private boolean isRightSkillTree(String skill, String skillTree) {
