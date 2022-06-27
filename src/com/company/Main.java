@@ -3,6 +3,7 @@ package com.company;
 import com.company.coupang1.Coupang1;
 import com.company.coupang2.Coupang2;
 import com.company.coupang3.Coupang3;
+import com.company.kakao.binaryConverting.BinaryConverting;
 import com.company.kakao.friendsBlock.FriendsBlock;
 import com.company.kakao.skillTree.SkillTree;
 import com.company.kakao.skillTree.SkillTree2;
@@ -63,11 +64,14 @@ public class Main {
 //        System.out.println("answer = " + answer);
 
 
-        String skill = "CBD";
-        String[] skillTrees = {"BACDE", "CBADF", "AECB", "BDA"};
+//        String skill = "CBD";
+//        String[] skillTrees = {"BACDE", "CBADF", "AECB", "BDA"};
+//
+//        SkillTree2 skillTree = new SkillTree2();
+//        int answer = skillTree.solution("CBD", skillTrees);
+//        System.out.println("answer = " + answer);
 
-        SkillTree2 skillTree = new SkillTree2();
-        int answer = skillTree.solution("CBD", skillTrees);
-        System.out.println("answer = " + answer);
+        BinaryConverting binaryConverting = new BinaryConverting();
+        binaryConverting.solution("110010101001");
     }
 }
