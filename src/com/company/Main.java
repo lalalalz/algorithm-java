@@ -9,6 +9,8 @@ import com.company.kakao.skillTree.SkillTree;
 import com.company.kakao.skillTree.SkillTree2;
 import com.company.kakao.snail.Snail;
 import com.company.kakao.dividePowerGrid.Solution;
+import level1.programmers.BadClient;
+import level1.programmers.StringToNumber;
 
 public class Main {
 
@@ -71,7 +73,16 @@ public class Main {
 //        int answer = skillTree.solution("CBD", skillTrees);
 //        System.out.println("answer = " + answer);
 
-        BinaryConverting binaryConverting = new BinaryConverting();
-        binaryConverting.solution("110010101001");
+//        BinaryConverting binaryConverting = new BinaryConverting();
+//        binaryConverting.solution("110010101001");
+
+        BadClient stringToNumber = new BadClient();
+
+        String[] id = {"muzi", "frodo", "apeach", "neo"};
+        String[] report = {"muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"};
+        int k = 2;
+
+        stringToNumber.solution(id, report, k);
+
     }
 }
