@@ -9,9 +9,7 @@ import com.company.kakao.skillTree.SkillTree;
 import com.company.kakao.skillTree.SkillTree2;
 import com.company.kakao.snail.Snail;
 import com.company.kakao.dividePowerGrid.Solution;
-import level1.programmers.BadClient;
-import level1.programmers.ReversalTernary;
-import level1.programmers.StringToNumber;
+import level1.programmers.*;
 
 public class Main {
 
@@ -85,8 +83,15 @@ public class Main {
 //
 //        stringToNumber.solution(id, report, k);
 
-        ReversalTernary reversalTernary = new ReversalTernary();
-        reversalTernary.solution(45);
+//        ReversalTernary reversalTernary = new ReversalTernary();
+//        int answer = reversalTernary.solution(45);
+//        System.out.println("answer = " + answer);
+
+//        AdmissionRide admissionRide = new AdmissionRide();
+//        admissionRide.solution(3, 20, 4);
+
+        AlphabetSorting alphabetSorting = new AlphabetSorting();
+        alphabetSorting.solution("fdsaw");
 
     }
 }
