@@ -11,7 +11,7 @@ public class SumBetweenTwoNumbers {
         long sum = a + b;
 
         // 홀수개
-        if (n % 2 > 0) return sum * (n / 2) + sum / 2;
+        if (n % 2 > 0) return (long)(sum * (n / 2 + (double)1 / 2));
         return sum * n / 2;
     }
 }
