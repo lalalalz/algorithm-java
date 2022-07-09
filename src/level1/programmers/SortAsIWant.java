@@ -23,6 +23,7 @@ public class SortAsIWant {
             }
         };
 
+
         return Arrays.stream(strings)
                 .sorted(comparator)
                 .toArray(String[]::new);
