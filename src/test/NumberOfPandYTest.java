@@ -1,6 +1,6 @@
 package test;
 
-import level1.programmers.NumberOfPandY;
+import level1.NumberOfPandY;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

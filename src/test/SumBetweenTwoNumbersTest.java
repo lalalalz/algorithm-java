@@ -1,7 +1,6 @@
 package test;
 
-import level1.programmers.SumBetweenTwoNumbers;
-import org.junit.jupiter.api.Assertions;
+import level1.SumBetweenTwoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

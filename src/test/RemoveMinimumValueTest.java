@@ -1,6 +1,6 @@
 package test;
 
-import level1.programmers.RemoveMinimumValue;
+import level1.RemoveMinimumValue;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

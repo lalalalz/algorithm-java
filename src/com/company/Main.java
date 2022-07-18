@@ -1,15 +1,7 @@
 package com.company;
 
-import com.company.coupang1.Coupang1;
-import com.company.coupang2.Coupang2;
-import com.company.coupang3.Coupang3;
-import com.company.kakao.binaryConverting.BinaryConverting;
-import com.company.kakao.friendsBlock.FriendsBlock;
-import com.company.kakao.skillTree.SkillTree;
-import com.company.kakao.skillTree.SkillTree2;
-import com.company.kakao.snail.Snail;
-import com.company.kakao.dividePowerGrid.Solution;
-import level1.programmers.*;
+import level1.AlphabetSorting;
+//import level1.programmers.*;
 
 public class Main {
 

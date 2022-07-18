@@ -1,7 +1,6 @@
 package test;
 
-import level1.programmers.FindKim;
-import org.junit.jupiter.api.Assertions;
+import level1.FindKim;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

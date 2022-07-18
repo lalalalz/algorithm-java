@@ -1,6 +1,6 @@
 package test;
 
-import level1.programmers.SquareRoot;
+import level1.SquareRoot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

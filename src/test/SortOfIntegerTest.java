@@ -1,6 +1,6 @@
 package test;
 
-import level1.programmers.SortOfInteger;
+import level1.SortOfInteger;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,10 +1,8 @@
 package test;
 
-import level1.programmers.CheckString;
+import level1.CheckString;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CheckStringTest {
 

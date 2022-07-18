@@ -1,6 +1,6 @@
 package test;
 
-import level1.programmers.CollatsConjecture;
+import level1.CollatsConjecture;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

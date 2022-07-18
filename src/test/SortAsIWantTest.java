@@ -1,7 +1,6 @@
 package test;
 
-import level1.programmers.SortAsIWant;
-import org.junit.jupiter.api.Assertions;
+import level1.SortAsIWant;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

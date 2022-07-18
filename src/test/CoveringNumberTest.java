@@ -1,6 +1,6 @@
 package test;
 
-import level1.programmers.CoveringNumber;
+import level1.CoveringNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
