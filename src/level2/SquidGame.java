@@ -18,7 +18,6 @@ public class SquidGame {
 
         for (int nextX = 0; nextX < points[0].length; nextX++) {
             if (nextX == x) continue;
-
             if (y >= 0) {
                 result = Math.max(result, getMaxPoint(y + 1, nextX) + points[y][x]);
             }
