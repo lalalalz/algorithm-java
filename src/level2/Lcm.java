@@ -16,8 +16,6 @@ public class Lcm {
     }
 
     private int lcm(int a, int b) {
-        int bigger = Math.max(a, b);
-        int smaller = Math.min(a, b);
         return a * b / gcd(a, b);
     }
 
