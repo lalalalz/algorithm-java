@@ -8,16 +8,17 @@ public class Task1 {
     private int getLongestBinaryGap(int n) {
         int temp = 0;
         int longestBinaryGap = 0;
-        boolean isStarted = false;
 
-        for (int i = 1; i <= n; i*=2) {
-            if ((n & i) == i) {
+        String binaryString = Integer.toBinaryString(n);
+
+        for (int i = 1; i <= binaryString.length(); i++) {
+            if (binaryString.charAt(i - 1) == '1') {
                 longestBinaryGap = longestBinaryGap > temp ? longestBinaryGap : temp;
                 temp = 0;
             }
 
             else {
-                 temp++;
+                temp++;
             }
         }
 
