@@ -21,11 +21,9 @@ public class Joystick {
         int nonDefaultDirection = moveNonDefaultDirection(from, to);
         from = to;
 
-        return defaultDirection > nonDefaultDirection ?
-                nonDefaultDirection : defaultDirection;
+        return defaultDirection > nonDefaultDirection ? nonDefaultDirection : defaultDirection;
     }
 
-    private int moveCursor()
 
     private int moveNonDefaultDirection(char from, char to) {
         if(from > to) return to - ('Z' - from);
