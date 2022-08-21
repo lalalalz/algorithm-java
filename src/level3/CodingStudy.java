@@ -1,53 +1,56 @@
 package level3;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class CodingStudy {
 
-    Set<Integer> solvedProblems = new HashSet<>();
+    private int maxReqAlp;
+    private int maxReqCop;
+
+    private final int MAX = 0xffffff;
+    private int[][] minimumTime = new int[4501][4051];
 
     public int solution(int alp, int cop, int[][] problems) {
-        return getMinimumTime(new Info(alp, cop), problems);
+        init(problems);
+        return getMinimumTime(alp, cop, problems);
     }
 
-    private int getMinimumTime(Info info, int[][] problems) {
-        int minimumTime = 0;
+    private void init(int[][] problems) {
+        for (int i = 0; i < problems.length; i++) {
+            maxReqAlp = Math.max(maxReqAlp, problems[i][0]);
+            maxReqCop = Math.max(maxReqCop, problems[i][1]);
+        }
+    }
 
-        while (problems.length > solvedProblems.size()) {
-            minimumTime += solveProblem(info, problems);
+    private int getMinimumTime(int alp, int cop, int[][] problems) {
+        alp = Math.min(maxReqAlp, alp);
+        cop = Math.min(maxReqCop, cop);
+
+        if(alp >= maxReqAlp && cop >= maxReqCop) return 0;
+        if(minimumTime[alp][cop] > 0) return minimumTime[alp][cop];
+
+        minimumTime[alp][cop] = MAX;
+        if (maxReqAlp >= alp + 1) {
+            minimumTime[alp][cop] = Math.min(minimumTime[alp][cop],
+                    getMinimumTime(alp + 1, cop, problems) + 1);
+        }
+        if (maxReqCop >= cop + 1) {
+            minimumTime[alp][cop] = Math.min(minimumTime[alp][cop],
+                    getMinimumTime(alp, cop + 1, problems) + 1);
         }
 
-        return minimumTime;
-    }
+        for (int i = 0; i < problems.length; i++) {
+            int reqAlp = problems[i][0];
+            int reqCop = problems[i][1];
 
-    private int solveProblem(Info info, int[][] problems) {
-        int time = 0;
+            if (alp >= reqAlp && cop >= reqCop) {
+                int rwdAlp = problems[i][2];
+                int rwdCop = problems[i][3];
+                int cost   = problems[i][4];
 
-        for (int[] problem : problems) {
-            int alpReq = problem[0];
-            int copReq = problem[1];
-
-            if (info.alp >= alpReq && info.cop >= copReq) {
-                int alpRwd = problem[2];
-                int copRwd = problem[3];
-                int cost   = problem[4];
-
-
+                minimumTime[alp][cop] = Math.min(minimumTime[alp][cop],
+                        getMinimumTime(alp + rwdAlp, cop + rwdCop, problems) + cost);
             }
         }
 
-        return 0;
-    }
-
-    public static class Info {
-        int alp;
-        int cop;
-        Set<Integer> solvedProblem = new HashSet<>();
-
-        public Info(int alp, int cop) {
-            this.alp = alp;
-            this.cop = cop;
-        }
+        return minimumTime[alp][cop];
     }
 }

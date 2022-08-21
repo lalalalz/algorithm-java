@@ -17,10 +17,10 @@ public class SteppingStone {
 
         while (start <= end) {
             int mid = (start + end) / 2;
-            int maxContinuousLength =
+            int maxJumpLength =
                     crossRiver(Arrays.copyOf(stones, stones.length + 1), mid);
 
-            if (maxContinuousLength < k) {
+            if (maxJumpLength < k) {
                 answer = mid;
                 start = mid + 1;
             }
