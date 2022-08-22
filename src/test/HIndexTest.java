@@ -12,7 +12,7 @@ class HIndexTest {
     @Test
     void test1() {
         int[] citations = {3, 0, 6, 1, 5};
-        int result = hIndex.solution(citations, 3);
+        int result = hIndex.solution(citations);
         assertEquals(3, result);
     }
 
