@@ -21,17 +21,15 @@ public class MakeSameQueue {
             if (firstQueue.getSum() > secondQueue.getSum()) {
                 secondQueue.push(firstQueue.pop());
                 count++;
-                continue;
             }
 
             if (firstQueue.getSum() < secondQueue.getSum()) {
                 firstQueue.push(secondQueue.pop());
                 count++;
-                continue;
             }
 
-            if (firstQueue.getSum() == secondQueue.getSum()) {
-                break;
+            if (firstQueue.getSum().equals(secondQueue.getSum())) {
+               break;
             }
         }
 
@@ -44,7 +42,7 @@ public class MakeSameQueue {
         private Queue<Long> queue = new LinkedList<>();
 
         public SummaryQueue(int[] inputArray) {
-            for (int number : inputArray) {
+           for (int number : inputArray) {
                 queue.add((long) number);
                 sum += number;
             }
