@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 public class HikingCourse {
 
     private int max = 10000001;
-    private int[] intensityOfNode = new int[50001];
+    private int[] minimumIntensityOfNode = new int[50001];
     private List<Node>[] graph = new ArrayList[50001];
 
     public int[] solution(int n, int[][] paths, int[] gates, int[] summits) {
@@ -20,7 +20,7 @@ public class HikingCourse {
     private void init(int n, int[][] paths) {
         for (int i = 1; i <= n; i++) {
             graph[i] = new ArrayList<>();
-            intensityOfNode[i] = max;
+            minimumIntensityOfNode[i] = max;
         }
 
         for (int[] path : paths) {
@@ -37,8 +37,8 @@ public class HikingCourse {
                 .toArray();
 
         for (int summit : ints) {
-            if (minimumIntensity > intensityOfNode[summit]) {
-                minimumIntensity = intensityOfNode[summit];
+            if (minimumIntensity > minimumIntensityOfNode[summit]) {
+                minimumIntensity = minimumIntensityOfNode[summit];
                 nodeOfMinimumIntensity = summit;
             }
         }
@@ -58,7 +58,7 @@ public class HikingCourse {
             int now = node.nodeNumber;
             int intensity = node.intensity;
 
-            if (isTopOfMountain(now, summits) || intensity > intensityOfNode[now]) {
+            if (isTopOfMountain(now, summits) || intensity > minimumIntensityOfNode[now]) {
                 continue;
             }
 
@@ -66,11 +66,11 @@ public class HikingCourse {
                 Node connectedNode = graph[now].get(i);
 
                 int next = connectedNode.nodeNumber;
-                int intensityOfNext = connectedNode.intensity;
-                int newIntensity = Math.max(intensity, intensityOfNext);
+                int distanceOfPath = connectedNode.intensity;
+                int newIntensity = Math.max(intensity, distanceOfPath);
 
-                if (intensityOfNode[next] > newIntensity) {
-                    intensityOfNode[next] = newIntensity;
+                if (minimumIntensityOfNode[next] > newIntensity) {
+                    minimumIntensityOfNode[next] = newIntensity;
                     priorityQueue.add(new Node(next, newIntensity));
                 }
             }
