@@ -10,7 +10,7 @@ class LongestSubstringTest {
 
     @Test
     void test1() {
-        int result = solution.lengthOfLongestSubstring("abcabcbb");
+        int result = solution.lengthOfLongestSubstring("abcdefbaghi");
         Assertions.assertEquals(3, result);
 
     }
