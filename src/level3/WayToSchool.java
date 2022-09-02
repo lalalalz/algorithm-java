@@ -36,7 +36,6 @@ public class WayToSchool {
                 numberOfSameCharacter++;
             }
         }
-
         return numberOfSameCharacter == 1;
     }
 }
