@@ -1,7 +1,5 @@
 package level3;
 
-import java.util.Arrays;
-
 public class ChangeMoney {
 
     private static final int MAX = 1000000007;
@@ -11,19 +9,19 @@ public class ChangeMoney {
         return getNumberOfChangeCases(n, 0, money);
     }
 
-    private int getNumberOfChangeCases(int n, int moneyType, int[] money) {
-        int numberOfChangeCases = cache[n][moneyType];
+    private int getNumberOfChangeCases(int n, int prevMoney, int[] money) {
+        int numberOfChangeCases = cache[n][prevMoney];
 
         if(n == 0) return 1;
-        if(moneyType >= money.length) return 0;
         if(numberOfChangeCases > 0) return numberOfChangeCases;
 
-        numberOfChangeCases = getNumberOfChangeCases(n, moneyType + 1, money);
-        if (n - money[moneyType] >= 0) {
-            numberOfChangeCases = (numberOfChangeCases +
-                    getNumberOfChangeCases(n - money[moneyType], moneyType, money)) % MAX;
+        for (int i = prevMoney; i < money.length; i++) {
+            if (n - money[i] >= 0) {
+                numberOfChangeCases = (numberOfChangeCases +
+                        getNumberOfChangeCases(n - money[i], i, money)) % MAX;
+            }
         }
 
-        return cache[n][moneyType] = numberOfChangeCases;
+        return cache[n][prevMoney] = numberOfChangeCases;
     }
 }

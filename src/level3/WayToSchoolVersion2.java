@@ -23,19 +23,13 @@ public class WayToSchoolVersion2 {
 
     private int findMinimumStepToSchool(int y, int x) {
 
-        if(y == 1 && x == 1) {
-            return 1;
-        }
-
-        if(minimumSteps[y][x] > 0) {
-            return minimumSteps[y][x];
-        }
+        if(y == 1 && x == 1) return 1;
+        if(minimumSteps[y][x] > 0) return minimumSteps[y][x];
 
         if (y - 1 >= 1 && positionOfPuddles[y - 1][x] != PUDDLE) {
             minimumSteps[y][x] =
                     (minimumSteps[y][x] + findMinimumStepToSchool(y - 1, x)) % LIMIT;
         }
-
         if (x - 1 >= 1 && positionOfPuddles[y][x - 1] != PUDDLE) {
             minimumSteps[y][x] =
                     (minimumSteps[y][x] + findMinimumStepToSchool(y, x - 1)) % LIMIT;
