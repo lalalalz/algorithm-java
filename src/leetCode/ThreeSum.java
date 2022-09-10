@@ -1,19 +1,22 @@
 package leetCode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ThreeSum {
 
     private List<List<Integer>> triplets = new ArrayList<>();
-    private HashMap<Integer, Integer> countMap = new HashMap<>();
+//    private HashMap<Integer, Integer> countMap = new HashMap<>();
 
-    private static final int pivot = 50000;
-    private int[] countOfNumber = new int[100001];
+    private static final int pivot = 10000;
+    private int[] countOfNumber = new int[20000 + 1];
 
     public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
         generateCountMap(nums);
-//        findTripletsOfZeroSum(0, new int[3], nums);
-        return triplets;
+        int[] distinct = Arrays.stream(nums).distinct().toArray();
+        findTripletsOfZeroSum(distinct);
+        return triplets.stream().distinct().collect(Collectors.toList());
     }
 
     private void generateCountMap(int[] nums) {
@@ -22,21 +25,50 @@ public class ThreeSum {
         }
     }
 
-//    private void generateCountMap(int[] nums) {
-//        for (int num : nums) {
-//            Integer count = countMap.getOrDefault(num, 0);
-//            countMap.put(num, count + 1);
-//        }
-//    }
-
     private void findTripletsOfZeroSum(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i; j < nums.length; j++) {
-                if (countOfNumber[nums[i]] >= 0 && countOfNumber[nums[j]] >= 0) {
-
+                if (isTripletOfZeroSum(nums[i], nums[j]))
+                    addTriplet(nums[i], nums[j], -(nums[i] + nums[j]));
                 }
             }
         }
+
+    private void addTriplet(int first, int second, int third) {
+        List<Integer> newTriplet = new ArrayList<>();
+
+        newTriplet.add(first);
+        newTriplet.add(second);
+        newTriplet.add(third);
+
+        triplets.add(newTriplet);
+    }
+
+    private boolean isTripletOfZeroSum(int first, int second) {
+        int third = -(first + second);
+
+        if(third > 5000 || third < -5000) return false;
+        if(third < first || third < second) return false;
+
+        countOfNumber[first + pivot]--;
+        countOfNumber[second + pivot]--;
+        countOfNumber[third + pivot]--;
+
+        if (countOfNumber[first + pivot] < 0
+                || countOfNumber[second + pivot] < 0
+                || countOfNumber[third + pivot] < 0) {
+
+            countOfNumber[first + pivot]++;
+            countOfNumber[second + pivot]++;
+            countOfNumber[third + pivot]++;
+            return false;
+        }
+
+        countOfNumber[first + pivot]++;
+        countOfNumber[second + pivot]++;
+        countOfNumber[third + pivot]++;
+
+        return true;
     }
 
 //    private void findTripletsOfZeroSum(int index, int[] triplet, int[] nums) {
@@ -69,6 +101,13 @@ public class ThreeSum {
 //        }
 //
 //        return tripletList;
+//    }
+
+    //    private void generateCountMap(int[] nums) {
+//        for (int num : nums) {
+//            Integer count = countMap.getOrDefault(num, 0);
+//            countMap.put(num, count + 1);
+//        }
 //    }
 
     private boolean isZeroOfSum(int[] triplet) {
