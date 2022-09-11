@@ -6,10 +6,8 @@ import java.util.stream.Collectors;
 public class ThreeSum {
 
     private List<List<Integer>> triplets = new ArrayList<>();
-//    private HashMap<Integer, Integer> countMap = new HashMap<>();
-
-    private static final int pivot = 10000;
-    private int[] countOfNumber = new int[20000 + 1];
+    private static final int pivot = 100000;
+    private int[] countOfNumber = new int[200000 + 2];
 
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
@@ -30,9 +28,9 @@ public class ThreeSum {
             for (int j = i; j < nums.length; j++) {
                 if (isTripletOfZeroSum(nums[i], nums[j]))
                     addTriplet(nums[i], nums[j], -(nums[i] + nums[j]));
-                }
             }
         }
+    }
 
     private void addTriplet(int first, int second, int third) {
         List<Integer> newTriplet = new ArrayList<>();
@@ -47,7 +45,7 @@ public class ThreeSum {
     private boolean isTripletOfZeroSum(int first, int second) {
         int third = -(first + second);
 
-        if(third > 5000 || third < -5000) return false;
+        if(third > 100000 || third < -100000) return false;
         if(third < first || third < second) return false;
 
         countOfNumber[first + pivot]--;
