@@ -8,6 +8,7 @@ public class ThreeSumVersion2 {
     private HashMap<Integer, Integer> countMap = new HashMap<>();
 
     public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
         generateCountMap(nums);
         findTripletsOfZeroSum(nums);
         return getTripletsFromSet();
@@ -27,33 +28,46 @@ public class ThreeSumVersion2 {
     private void findTripletsOfZeroSum(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i; j < nums.length; j++) {
-                if (canUsed(nums[i], nums[j], -(nums[i] + nums[j]))) {
-                    tripletSet.add(Arrays.asList(nums[i], nums[j], -(nums[i]), nums[j]));
+                int first = nums[i];
+                int second = nums[j];
+                int third = -(nums[i] + nums[j]);
+
+                if (third >= second && canUsed(first, second, third)) {
+                    tripletSet.add(Arrays.asList(first, second, third));
                 }
             }
         }
     }
 
     private boolean canUsed(int first, int second, int third) {
-        if(decreaseCount(first, second, third) >= 0) {
-            return false;
+        return decreaseCount(first, second, third);
+    }
+
+    private boolean decreaseCount(int first, int second, int third) {
+        HashMap<Integer, Integer> count = new HashMap<>();
+
+        initCount(first, count);
+        initCount(second, count);
+        initCount(third, count);
+
+        decrease(first, count);
+        decrease(second, count);
+        decrease(third, count);
+
+        for (Map.Entry<Integer, Integer> element : count.entrySet()) {
+            if (element.getValue() < 0) {
+                return false;
+            }
         }
 
         return true;
     }
 
-    private int decreaseCount(int first, int second, int third) {
-        int sum = 0;
+    private void decrease(int first, HashMap<Integer, Integer> count) {
+        count.put(first, count.get(first) - 1);
+    }
 
-        int firstCount = countMap.getOrDefault(first, -1);
-        sum = firstCount - 1;
-
-        int secondCount = countMap.getOrDefault(second, -1);
-        sum = secondCount - 1;
-
-        int thirdCount = countMap.getOrDefault(third, -1);
-        sum = thirdCount - 1;
-
-        return sum;
+    private void initCount(int first, HashMap<Integer, Integer> count) {
+        count.put(first, countMap.getOrDefault(first, -3000));
     }
 }

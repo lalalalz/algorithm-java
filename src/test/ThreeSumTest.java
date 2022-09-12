@@ -1,13 +1,14 @@
 package test;
 
 import leetCode.ThreeSum;
+import leetCode.ThreeSumVersion2;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 class ThreeSumTest {
 
-    ThreeSum solution = new ThreeSum();
+    ThreeSumVersion2 solution = new ThreeSumVersion2();
 
     @Test
     void test1() {
