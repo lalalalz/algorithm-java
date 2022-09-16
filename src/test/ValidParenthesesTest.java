@@ -3,6 +3,9 @@ package test;
 import leetCode.ValidParentheses;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValidParenthesesTest {
@@ -37,5 +40,12 @@ class ValidParenthesesTest {
     void test5() {
         boolean result = solution.isValid("]");
         assertFalse(result);
+    }
+
+    @Test
+    void myTest() {
+        char[] a = {'a', 'b', 'c'};
+
+
     }
 }
