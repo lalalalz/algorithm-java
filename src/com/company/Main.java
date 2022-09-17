@@ -3,7 +3,7 @@ package com.company;
 import level1.AlphabetSorting;
 //import level1.programmers.*;
 
-public class Main {
+public class Main {   
 
     public static void main(String[] args) {
 
