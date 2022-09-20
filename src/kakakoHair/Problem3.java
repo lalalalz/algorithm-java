@@ -19,9 +19,9 @@ public class Problem3 {
     private int targetY;
     private int targetX;
 
-    private int[][] cache = new int[100][101];
+    private int[][] cache = new int[MAX][MAX];
     private int[][] dir = {{0,1}, {1,0}, {0, -1}, {-1, 0}};
-    private boolean[][] visited = new boolean[101][101];
+    private boolean[][] visited = new boolean[MAX][MAX];
 
     public int solution(int[][] board, int c) {
         init(board, c);
@@ -47,8 +47,6 @@ public class Problem3 {
             }
         }
     }
-
-
 
     private int getMinimumEnergyByBfs(int[][] board, int robotY, int robotX) {
         Queue<Point> queue = new LinkedList<>();
@@ -96,8 +94,6 @@ public class Problem3 {
             this.energy = energy;
         }
     }
-
-
 
     private int getMinimumEnergy(int[][]board, int y, int x) {
         int result = cache[y][x];
