@@ -1,6 +1,5 @@
 package kakakoHair;
 
-import java.lang.annotation.Target;
 import java.util.LinkedList;
 import java.util.Queue;
 
