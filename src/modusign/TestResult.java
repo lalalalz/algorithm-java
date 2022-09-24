@@ -39,6 +39,4 @@ public class TestResult {
 
         studentsThatPass(students.stream(), 50).forEach(System.out::println);
     }
-
-
 }
