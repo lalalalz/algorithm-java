@@ -1,90 +1,44 @@
 package leetCode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LongestPalindrome {
 
-    private int[][] isPalindrome = new int[1001][1001];
-    
-//    public String longestPalindrome(String str) {
-//        init();
-//        checkPalindrome(0, str.length() - 1, str);
-//        return getLongestPalindrome(str);
-//    }
-
-    private void init() {
-        for (int i = 0; i < 1001; i++) {
-            for (int j = 0; j < 1001; j++) {
-                isPalindrome[i][j] = -1;
-            }
-        }
+    public int longestPalindrome(String s) {
+        return getLongestPalindromeLength(s);
     }
 
-    private String getLongestPalindrome(String source) {
-        int start = 0;
-        int end = 0;
+    private int getLongestPalindromeLength(String s) {
+        int result = 0;
+        boolean isOddNumberUsed = false;
+        HashMap<Character, Integer> countOfCharacters = getCountOfCharacters(s);
 
-        for (int i = 0; i < source.length(); i++) {
-            for (int j = source.length() - 1; j >= i ; j--) {
-                if (isPalindrome[i][j] == 1 && end - start < j - i) {
-                    end = j;
-                    start = i;
-                }
+        for (Map.Entry<Character, Integer> element : countOfCharacters.entrySet()) {
+            int count = element.getValue();
+
+            if (count % 2 > 0) {
+                result += isOddNumberUsed ? count - 1 : count;
+                isOddNumberUsed = true;
+            }
+            else {
+                result += count;
             }
         }
 
-        return source.substring(start, end + 1);
+        return result;
     }
 
-//    private int checkPalindrome(int begin, int end, String source) {
-//        if(begin >= end) return isPalindrome[begin][end] = 1;
-//        if(isPalindrome[begin][end] > -1) return isPalindrome[begin][end];
-//
-//        checkPalindrome(begin + 1, end, source);
-//        checkPalindrome(begin, end - 1, source);
-//
-//        if(source.charAt(begin) == source.charAt(end)) {
-//            isPalindrome[begin][end] = checkPalindrome(begin + 1, end - 1, source);
-//        }
-//        else {
-//            isPalindrome[begin][end] = 0;
-//        }
-//
-//        return isPalindrome[begin][end];
-//    }
+    private HashMap<Character, Integer> getCountOfCharacters(String s) {
+        HashMap<Character, Integer> result = new HashMap<>();
 
-    public String longestPalindrome(String source) {
-
-        int begin = 0;
-        int end   = 0;
-
-        init();
-
-        for (int i = 0; i < source.length(); i++) {
-            for (int j = i; j < source.length(); j++) {
-                if (checkPalindrome(i, j, source) == 1 && j - i > end - begin) {
-                    begin = i;
-                    end   = j;
-                }
-            }
+        for (int i = 0; i < s.length(); i++) {
+            char currentCharacter = s.charAt(i);
+            int count = result.getOrDefault(currentCharacter, 0);
+            result.put(currentCharacter, count + 1);
         }
 
-
-        return source.substring(begin, end + 1);
+        return result;
     }
 
-    public int checkPalindrome(int begin, int end, String source) {
-        if(begin >= end) {
-            return isPalindrome[begin][end] = 1;
-        }
-
-        if(isPalindrome[begin][end] > -1) {
-            return isPalindrome[begin][end];
-        }
-
-        if(source.charAt(begin) == source.charAt(end)) {
-            return isPalindrome[begin][end]
-                    = checkPalindrome(begin + 1, end - 1, source);
-        }
-
-        return isPalindrome[begin][end] = 0;
-    }
 }
