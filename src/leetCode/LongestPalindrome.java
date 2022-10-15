@@ -33,9 +33,8 @@ public class LongestPalindrome {
         HashMap<Character, Integer> result = new HashMap<>();
 
         for (int i = 0; i < s.length(); i++) {
-            char currentCharacter = s.charAt(i);
-            int count = result.getOrDefault(currentCharacter, 0);
-            result.put(currentCharacter, count + 1);
+            int count = result.getOrDefault(s.charAt(i), 0);
+            result.put(s.charAt(i), count + 1);
         }
 
         return result;
