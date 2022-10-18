@@ -8,17 +8,22 @@ public class BestTimeToBuyAndSellStock {
 
     private int getMaxProfit(int[] prices) {
         int maxProfit = 0;
+        int prevStockPrice;
+        int currStockPrice;
 
         for (int i = 1; i < prices.length; i++) {
-            if (isUpperLimit(prices, i)) {
-                maxProfit += prices[i] - prices[i - 1];
+            currStockPrice = prices[i];
+            prevStockPrice = prices[i - 1];
+
+            if (isUpperLimit(currStockPrice, prevStockPrice)) {
+                maxProfit += currStockPrice - prevStockPrice;
             }
         }
 
         return maxProfit;
     }
 
-    private boolean isUpperLimit(int[] prices, int i) {
-        return prices[i] >= prices[i - 1];
+    private boolean isUpperLimit(int currStockPrice, int prevStockPrice) {
+        return currStockPrice >= prevStockPrice;
     }
 }
