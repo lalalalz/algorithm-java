@@ -15,6 +15,7 @@ public class RemoveDuplicateLetters {
         return generateDuplicatedString(s, countOfAlphabet);
     }
 
+
     private int[] countAlphabet(String s) {
         int[] result = new int[ALPHABETS];
 
