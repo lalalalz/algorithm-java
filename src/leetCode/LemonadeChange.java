@@ -12,7 +12,7 @@ public class LemonadeChange {
         for (int bill : bills) {
             chargeChanges(bill, changes);
 
-            if (!doChange(bill, changes)) {
+            if (!canChange(bill, changes)) {
                 canAllChange = false;
                 break;
             }
@@ -25,7 +25,7 @@ public class LemonadeChange {
         changes[bill]++;
     }
 
-    private boolean doChange(int bill, int[] changes) {
+    private boolean canChange(int bill, int[] changes) {
         int change = bill - 5;
 
         while (changes[TEN] > 0 && change >= TEN) {
