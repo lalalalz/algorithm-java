@@ -24,8 +24,8 @@ public class LongestSubsequence {
         int[] result = new int[nums.length];
 
         Arrays.sort(nums);
-
         result[0] = nums[0];
+
         for (int i = 1; i < nums.length; i++) {
             result[i] += result[i - 1] + nums[i];
         }
@@ -34,27 +34,21 @@ public class LongestSubsequence {
     }
 
     private int getSizeOfSubsequenceThatSumLessThanOrEqual(int[] accumulativeSum, int query) {
-        int mid = 0;
         int begin = 0;
         int end = accumulativeSum.length - 1;
 
-        while (begin <= end) {
-            mid = (begin + end) / 2;
+        while (begin < end) {
+            int mid = (begin + end) / 2;
 
-            if (accumulativeSum[mid] - query > 0) {
-                end = mid - 1;
+            if (accumulativeSum[mid] >= query) {
+                end = mid;
             }
 
-            if (accumulativeSum[mid] - query < 0) {
+            else {
                 begin = mid + 1;
-            }
-
-            if (accumulativeSum[mid] - query == 0) {
-                break;
             }
         }
 
-        if(accumulativeSum[mid] <= query) return mid + 1;
-        return mid;
+        return accumulativeSum[begin] <= query ? begin + 1 : begin;
     }
 }
