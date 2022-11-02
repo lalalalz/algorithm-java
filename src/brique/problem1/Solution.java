@@ -3,7 +3,7 @@ package brique.problem1;
 import java.util.ArrayList;
 import java.util.List;   
 
-public class Solution {
+public class Solution { 
 
     public static void main(String[] args) {
         CSVConverter converter = new CSVConverter();
