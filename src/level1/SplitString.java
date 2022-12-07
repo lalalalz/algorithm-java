@@ -14,8 +14,8 @@ public class SplitString {
     }
 
     private String split(String str) {
-        int sameCount = 1;
-        int nonSameCount = 0;
+        int  sameCount = 1;
+        int  nonSameCount = 0;
         char firstCharacter = str.charAt(0);
 
         for (int i = 1; i < str.length(); i++) {
