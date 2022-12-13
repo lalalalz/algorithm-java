@@ -14,8 +14,8 @@ public class MakingDots {
     }
 
     private int getMaxY(int d, int x) {
-        long dd = (long) Math.pow(d, 2);
-        long xx = (long) Math.pow(x, 2);
-        return (int) Math.sqrt(dd - xx);
+        long dSquare = (long) Math.pow(d, 2);
+        long xSquare = (long) Math.pow(x, 2);
+        return (int) Math.sqrt(dSquare - xSquare);
     }
 }
