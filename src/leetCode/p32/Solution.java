@@ -54,4 +54,51 @@ public class Solution {
 
         return answer;
     }
+
+    public int longestValidParenthesesTwoPass(String s) {
+        int answer = 0;
+        int left = 0;
+        int right = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char character = s.charAt(i);
+            if (character == '(') {
+                left++;
+            }
+            else {
+                right++;
+            }
+
+            if (left == right) {
+                answer = Math.max(answer, 2 * right);
+            }
+            else if (right > left) {
+                left = 0;
+                right = 0;
+            }
+        }
+
+        left = 0;
+        right = 0;
+
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char character = s.charAt(i);
+            if (character == '(') {
+                left++;
+            }
+            else {
+                right++;
+            }
+
+            if (left == right) {
+                answer = Math.max(answer, 2 * left);
+            }
+            else if (left > right) {
+                left = 0;
+                right = 0;
+            }
+        }
+
+        return answer;
+    }
 }
