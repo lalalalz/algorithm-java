@@ -1,9 +1,6 @@
 package leetCode.p1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Solution {
     public int[] twoSum(int[] nums, int target) {
@@ -30,6 +27,31 @@ public class Solution {
         return null;
     }
 
+    private int[] twoSumVersion2(int[] nums, int target) {
+        List<Integer> answer = new ArrayList<>();
+        Map<Integer, Integer> numberIndexMap = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            numberIndexMap.put(nums[i], i);
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (numberIndexMap.containsKey(target - nums[i])) {
+                Integer index = numberIndexMap.get(target - nums[i]);
+                if (index != i) {
+                    answer.add(i);
+                    answer.add(index);
+                    break;
+                }
+            }
+        }
+
+        return answer
+                .stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
+    }
+
     private Pair[] generatePairs(int[] nums) {
         List<Pair> pairs = new ArrayList<>();
 
@@ -40,22 +62,23 @@ public class Solution {
         return pairs.toArray(new Pair[]{});
     }
 
-    record Pair(int index, int value) {}
+    record Pair(int index, int value) {
+    }
 }
 
 /**
  * class Solution {
- *     public int[] twoSum(int[] nums, int target) {
- *         Map<Integer, Integer> map = new HashMap<>();
- *         for (int i = 0; i < nums.length; i++) {
- *             int complement = target - nums[i];
- *             if (map.containsKey(complement)) {
- *                 return new int[] { map.get(complement), i };
- *             }
- *             map.put(nums[i], i);
- *         }
- *         // Return an empty array if no solution is found
- *         return new int[] {};
- *     }
+ * public int[] twoSum(int[] nums, int target) {
+ * Map<Integer, Integer> map = new HashMap<>();
+ * for (int i = 0; i < nums.length; i++) {
+ * int complement = target - nums[i];
+ * if (map.containsKey(complement)) {
+ * return new int[] { map.get(complement), i };
+ * }
+ * map.put(nums[i], i);
+ * }
+ * // Return an empty array if no solution is found
+ * return new int[] {};
+ * }
  * }
  */
