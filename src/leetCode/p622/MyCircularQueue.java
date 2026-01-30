@@ -11,6 +11,7 @@ class MyCircularQueue {
     public MyCircularQueue(int k) {
         front = 0;
         rear = -1;
+        size = 0;
         capacity = k;
         queue = new int[k];
     }
@@ -37,10 +38,16 @@ class MyCircularQueue {
     }
 
     public int Front() {
+        if (size == 0) {
+            return -1;
+        }
         return queue[front];
     }
 
     public int Rear() {
+        if (size == 0) {
+            return -1;
+        }
         return queue[rear];
     }
 
