@@ -60,7 +60,8 @@ public class LinkedList {
 
         if (current == head) {
             head = current.getNext();
-        } else {
+        }
+        else {
             prev.setNext(current.getNext());
         }
 
@@ -83,7 +84,7 @@ public class LinkedList {
 
         StringBuilder sb = new StringBuilder();
         while (current != null) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append(current.getValue());
