@@ -17,35 +17,35 @@ class MyCircularQueue {
     }
 
     public boolean enQueue(int value) {
-        if (size == capacity) {
+        if (isFull()) {
             return false;
         }
 
-        rear = next(rear);
+        rear = nextIndex(rear);
         queue[rear] = value;
         size++;
         return true;
     }
 
     public boolean deQueue() {
-        if (size == 0) {
+        if (isEmpty()) {
             return false;
         }
 
-        front = next(front);
+        front = nextIndex(front);
         size--;
         return true;
     }
 
     public int Front() {
-        if (size == 0) {
+        if (isEmpty()) {
             return -1;
         }
         return queue[front];
     }
 
     public int Rear() {
-        if (size == 0) {
+        if (isEmpty()) {
             return -1;
         }
         return queue[rear];
@@ -59,7 +59,7 @@ class MyCircularQueue {
         return size == capacity;
     }
 
-    private int next(int index) {
+    private int nextIndex(int index) {
         return (index + 1) % capacity;
     }
 }
