@@ -84,9 +84,7 @@ public class LinkedList {
 
         StringBuilder sb = new StringBuilder();
         while (current != null) {
-            if (!sb.isEmpty()) {
-                sb.append(", ");
-            }
+            if (!sb.isEmpty()) sb.append(", ");
             sb.append(current.getValue());
             current = current.getNext();
         }
