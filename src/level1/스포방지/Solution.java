@@ -25,114 +25,41 @@ class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int solution1 = solution.solution("my phone number is 01012345678 and may i have your phone number", new int[][]{{5, 5}, {25, 28}, {34, 40}, {53, 59}});
-        System.out.println("solution1 = " + solution1);
+        int result = solution.solution("my phone number is 01012345678 and may i have your phone number", new int[][]{{5, 5}, {25, 28}, {34, 40}, {53, 59}});
+        System.out.println("result = " + result);
     }
 
     public int solution(String message, int[][] spoilerRanges) {
         int answer = 0;
-        StringBuilder blindMessage = new StringBuilder(message);
+        String maskedMessage = buildMaskedMessage(message, spoilerRanges);
+        Set<String> nonSpoilerWords = collectNonSpoilerWords(maskedMessage);
+        Set<String> counted = new HashSet<>();
 
-        // 스포 방지 처리
-        for (int[] spoilerRange : spoilerRanges) {
-            for (int i = spoilerRange[0]; i <= spoilerRange[1]; i++) {
-                if (blindMessage.charAt(i) != ' ') {
-                    blindMessage.setCharAt(i, '*');
-                }
-            }
-        }
-
-        // 스포일러 문자 구분
-        Set<String> spoilerWord = Arrays
-                .stream(blindMessage
-                        .toString()
-                        .split(" "))
-                .filter(word -> !word.contains("*"))
-                .collect(Collectors.toSet());
-
-        // 중요 문자 구분하기
         for (String word : message.split(" ")) {
-            if (!spoilerWord.contains(word)) {
+            if (!nonSpoilerWords.contains(word) && !counted.contains(word)) {
                 answer++;
-                spoilerWord.add(word);
+                counted.add(word);
             }
         }
 
         return answer;
     }
 
-    public int solution2(String message, int[][] spoilerRanges) {
-        // 단어별로 나눈다.
-        String[] numbering = numberingOfWord(message);
-
-        // 스티커를 붙이고, 스티커에 붙은 단어의 넘버를 반환한다.
-        List<Set<Integer>> stickingResult = sticking(numbering, spoilerRanges);
-
-        // 논 스포일러 목록을 구한다.
-        Set<String> nonSpoilers = getNonSpoilers(numbering, stickingResult);
-
-        // 스티커를 하나씩 떼면서, 중요 단어인지 확인한다.
-        Set<String> spoilers = new HashSet<>();
-        for (Set<Integer> stuckWordNumbers : stickingResult) {
-            for (Integer stuckWordNumber : stuckWordNumbers) {
-                String word = numbering[stuckWordNumber];
-                if (!nonSpoilers.contains(word) && !spoilers.contains(word)) {
-                    spoilers.add(word);
+    private String buildMaskedMessage(String message, int[][] spoilerRanges) {
+        StringBuilder masked = new StringBuilder(message);
+        for (int[] range : spoilerRanges) {
+            for (int i = range[0]; i <= range[1]; i++) {
+                if (masked.charAt(i) != ' ') {
+                    masked.setCharAt(i, '*');
                 }
             }
         }
-
-        return spoilers.size();
+        return masked.toString();
     }
 
-    private Set<String> getNonSpoilers(String[] numbering, List<Set<Integer>> stickingResult) {
-        Set<Integer> spoilerNumbers = stickingResult
-                .stream()
-                .flatMap(Set::stream)
+    private Set<String> collectNonSpoilerWords(String maskedMessage) {
+        return Arrays.stream(maskedMessage.split(" "))
+                .filter(word -> !word.contains("*"))
                 .collect(Collectors.toSet());
-
-        Set<String> nonSpoilers = new HashSet<>();
-        for (int i = 0; i < numbering.length; i++) {
-            if (!spoilerNumbers.contains(i)) {
-                nonSpoilers.add(numbering[i]);
-            }
-        }
-
-        return nonSpoilers;
-    }
-
-    private List<Set<Integer>> sticking(String[] numbering, int[][] spoilerRanges) {
-        List<Set<Integer>> stickingResult = new ArrayList<>();
-
-        for (int[] spoilerRange : spoilerRanges) {
-            int startOfSpoiler = spoilerRange[0];
-            int endOfSpoiler = spoilerRange[1];
-            stickingResult.add(getIntegers(numbering, startOfSpoiler, endOfSpoiler));
-        }
-
-        return stickingResult;
-    }
-
-    private static Set<Integer> getIntegers(String[] numbering, int startOfSpoiler, int endOfSpoiler) {
-        Set<Integer> stuckWordNumbers = new HashSet<>();
-        int pos = 0;
-
-        for (int i = 0; i < numbering.length; i++) {
-            String word = numbering[i];
-            int wordStart = pos;
-            int wordEnd = pos + word.length() - 1;
-
-            if (wordStart <= endOfSpoiler && wordEnd >= startOfSpoiler) {
-                stuckWordNumbers.add(i);
-            }
-
-            pos += word.length() + 1; // +1 for space
-        }
-
-        return stuckWordNumbers;
-    }
-
-    private String[] numberingOfWord(String message) {
-        return message.split(" ");
     }
 }
