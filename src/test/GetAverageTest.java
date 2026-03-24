@@ -1,9 +1,9 @@
 package test;
 
-import level1.GetAverage;
 import org.junit.jupiter.api.Test;
+import temp.GetAverage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GetAverageTest {
 

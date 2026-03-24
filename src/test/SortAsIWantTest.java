@@ -1,9 +1,9 @@
 package test;
 
-import level1.SortAsIWant;
 import org.junit.jupiter.api.Test;
+import temp.SortAsIWant;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class SortAsIWantTest {
 

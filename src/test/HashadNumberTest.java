@@ -1,9 +1,9 @@
 package test;
 
-import level1.HashadNumber;
 import org.junit.jupiter.api.Test;
+import temp.HashadNumber;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HashadNumberTest {
 

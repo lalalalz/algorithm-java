@@ -1,8 +1,8 @@
 package test;
 
-import level1.AdmissionRide;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import temp.AdmissionRide;
 
 
 class AdmissionRideTest {
@@ -11,7 +11,7 @@ class AdmissionRideTest {
 
     @Test
     void test() {
-        long answer = admissionRide.solution(2500,0, 2500);
+        long answer = admissionRide.solution(2500, 0, 2500);
         Assertions.assertEquals(10, answer);
     }
 }

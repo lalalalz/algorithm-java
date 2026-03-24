@@ -1,9 +1,9 @@
 package test;
 
-import level1.XAndNArray;
 import org.junit.jupiter.api.Test;
+import temp.XAndNArray;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class XAndNArrayTest {
 

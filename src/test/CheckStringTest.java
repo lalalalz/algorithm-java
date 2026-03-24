@@ -1,8 +1,8 @@
 package test;
 
-import level1.CheckString;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import temp.CheckString;
 
 class CheckStringTest {
 

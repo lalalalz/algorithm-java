@@ -1,9 +1,9 @@
 package test;
 
-import level1.AddOfMatrix;
 import org.junit.jupiter.api.Test;
+import temp.AddOfMatrix;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class AddOfMatrixTest {
 

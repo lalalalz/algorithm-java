@@ -1,9 +1,9 @@
 package test;
 
-import level1.SortOfInteger;
 import org.junit.jupiter.api.Test;
+import temp.SortOfInteger;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SortOfIntegerTest {
 

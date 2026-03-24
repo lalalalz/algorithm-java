@@ -1,0 +1,11 @@
+# 크레덴셜 (절대 커밋 금지)
+.env
+scripts/.env
+
+# Node.js
+scripts/node_modules/
+
+# IntelliJ
+out/
+.DS_Store
+*.iml

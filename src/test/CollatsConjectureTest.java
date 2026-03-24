@@ -1,9 +1,9 @@
 package test;
 
-import level1.CollatsConjecture;
 import org.junit.jupiter.api.Test;
+import temp.CollatsConjecture;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CollatsConjectureTest {
 

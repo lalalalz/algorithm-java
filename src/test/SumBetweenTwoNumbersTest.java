@@ -1,10 +1,10 @@
 package test;
 
-import level1.SumBetweenTwoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import temp.SumBetweenTwoNumbers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SumBetweenTwoNumbersTest {
 

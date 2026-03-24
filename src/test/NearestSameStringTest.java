@@ -1,9 +1,9 @@
 package test;
 
-import level1.NearestSameString;
 import org.junit.jupiter.api.Test;
+import temp.NearestSameString;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class NearestSameStringTest {
 

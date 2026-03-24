@@ -1,9 +1,9 @@
 package test;
 
-import level1.RemoveMinimumValue;
 import org.junit.jupiter.api.Test;
+import temp.RemoveMinimumValue;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class RemoveMinimumValueTest {
 

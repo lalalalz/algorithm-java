@@ -1,8 +1,8 @@
 package test;
 
-import level1.GetMiddleLetters;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import temp.GetMiddleLetters;
 
 class GetMiddleLettersTest {
 

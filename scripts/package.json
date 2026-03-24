@@ -1,0 +1,13 @@
+{
+  "name": "programmers-scripts",
+  "version": "1.0.0",
+  "description": "프로그래머스 문제 추천 스크립트",
+  "main": "get_problems.js",
+  "scripts": {
+    "recommend": "node get_problems.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "puppeteer": "^22.0.0"
+  }
+}

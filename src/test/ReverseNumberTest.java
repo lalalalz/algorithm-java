@@ -1,9 +1,9 @@
 package test;
 
-import level1.ReverseNumber;
 import org.junit.jupiter.api.Test;
+import temp.ReverseNumber;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class ReverseNumberTest {
 

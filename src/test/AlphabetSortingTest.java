@@ -1,8 +1,8 @@
 package test;
 
-import level1.AlphabetSorting;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import temp.AlphabetSorting;
 
 class AlphabetSortingTest {
 

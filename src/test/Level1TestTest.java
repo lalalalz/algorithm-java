@@ -1,7 +1,6 @@
 package test;
 
-import level1.Level1Test;
-import org.junit.jupiter.api.Test;
+import temp.Level1Test;
 
 class Level1TestTest {
 

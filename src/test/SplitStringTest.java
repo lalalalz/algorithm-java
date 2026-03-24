@@ -1,9 +1,9 @@
 package test;
 
-import level1.SplitString;
 import org.junit.jupiter.api.Test;
+import temp.SplitString;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SplitStringTest {
 

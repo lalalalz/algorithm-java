@@ -1,9 +1,9 @@
 package test;
 
-import level1.MinimumArea;
 import org.junit.jupiter.api.Test;
+import temp.MinimumArea;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MinimumAreaTest {
 

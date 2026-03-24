@@ -1,9 +1,9 @@
 package test;
 
-import level1.SquareRoot;
 import org.junit.jupiter.api.Test;
+import temp.SquareRoot;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SquareRootTest {
 

@@ -1,9 +1,9 @@
 package test;
 
-import level1.HateSameWord;
 import org.junit.jupiter.api.Test;
+import temp.HateSameWord;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class HateSameWordTest {
 
@@ -12,8 +12,8 @@ class HateSameWordTest {
     @Test
     void test() {
         //given
-        int[] input1 = {1,1,3,3,0,1,1};
-        int[] input2 = {4,4,4,3,3};
+        int[] input1 = {1, 1, 3, 3, 0, 1, 1};
+        int[] input2 = {4, 4, 4, 3, 3};
 
         //when
         int[] output1 = hateSameWord.solution(input1);
