@@ -107,6 +107,52 @@ async function main() {
     await page.keyboard.press('Escape');
     await new Promise(r => setTimeout(r, 500));
 
+    // 언어 확인 및 Java로 변경 (네비게이션 대비)
+    const currentLang = await page.evaluate(() => {
+      const btn = document.querySelector('.btn.btn-dark.dropdown-toggle');
+      return btn ? btn.textContent.trim() : '';
+    });
+    const isJava = currentLang.toLowerCase().includes('java') && !currentLang.toLowerCase().includes('javascript');
+
+    if (!isJava) {
+      process.stderr.write(`현재 언어: ${currentLang} → Java로 변경 중...\n`);
+      // 네비게이션 대기를 클릭 전에 등록
+      const navPromise = page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 15000 }).catch(() => null);
+      await page.evaluate(() => {
+        const btn = document.querySelector('.btn.btn-dark.dropdown-toggle');
+        if (btn) btn.click();
+      });
+      await new Promise(r => setTimeout(r, 500));
+      // evaluateHandle로 Java 항목의 DOM 핸들 획득
+      const javaHandle = await page.evaluateHandle(() => {
+        const items = Array.from(document.querySelectorAll('.dropdown-menu li a, .dropdown-item'));
+        return items.find(el => {
+          const t = el.textContent.trim().toLowerCase();
+          return t === 'java' || t === 'java 11' || t === 'java 17' || t === 'java 21';
+        }) || null;
+      });
+      const javaEl = javaHandle.asElement();
+      if (javaEl) {
+        const javaText = await page.evaluate(el => el.textContent.trim(), javaEl);
+        await javaEl.click(); // Puppeteer 네이티브 클릭 (context 파괴에 안전)
+        await navPromise;     // 네비게이션 발생 시 완료 대기
+        process.stderr.write(`언어 변경: ${javaText}\n`);
+        // 에디터가 완전히 초기화될 때까지 대기
+        await page.waitForFunction(
+          () => {
+            const cm = document.querySelector('.CodeMirror');
+            return cm && cm.CodeMirror && cm.CodeMirror.getValue().length > 0;
+          },
+          { timeout: 10000 }
+        ).catch(() => {});
+        await new Promise(r => setTimeout(r, 500));
+      } else {
+        process.stderr.write('Java 항목을 찾지 못했습니다. 현재 언어로 진행합니다.\n');
+      }
+    } else {
+      process.stderr.write(`언어: Java (이미 선택됨)\n`);
+    }
+
     // CodeMirror 에디터에 코드 주입
     process.stderr.write('코드 주입 중...\n');
     const codeInjected = await page.evaluate((code) => {
@@ -116,13 +162,6 @@ async function main() {
       return true;
     }, editorCode);
     process.stderr.write(`코드 주입: ${codeInjected ? '성공' : '실패 (기존 코드 유지)'}\n`);
-
-    // 언어가 Java인지 확인 후 제출
-    const lang = await page.evaluate(() => {
-      const btn = document.querySelector('.btn.btn-dark.dropdown-toggle');
-      return btn ? btn.textContent.trim() : 'unknown';
-    });
-    process.stderr.write(`언어: ${lang}\n`);
 
     // 제출 버튼 클릭
     process.stderr.write('제출 중...\n');
