@@ -231,12 +231,14 @@ async function main() {
       process.stderr.write(`제출 내역 조회 실패: ${e.message}\n`);
     }
 
+    const finalResult = score === 100 ? 'pass' : (isCorrect ? 'pass' : 'fail');
+    const finalMessage = score === 100 ? '정답입니다!' : (score > 0 ? `${score}점` : resultText.slice(0, 200));
     console.log(JSON.stringify({
-      result: isCorrect ? 'pass' : 'fail',
+      result: finalResult,
       score,
       passed,
       total,
-      message: resultText.slice(0, 200)
+      message: finalMessage
     }, null, 2));
 
   } finally {
