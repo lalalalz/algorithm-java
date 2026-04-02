@@ -153,15 +153,49 @@ async function main() {
       process.stderr.write(`언어: Java (이미 선택됨)\n`);
     }
 
-    // CodeMirror 에디터에 코드 주입
+    // 언어가 Java로 확정될 때까지 대기
+    await page.waitForFunction(() => {
+      const btn = document.querySelector('.btn.btn-dark.dropdown-toggle');
+      if (!btn) return false;
+      const t = btn.textContent.trim().toLowerCase();
+      return t.includes('java') && !t.includes('javascript');
+    }, { timeout: 15000 }).catch(() => {});
+
+    // display:none이 아닌(활성화된) CodeMirror에 코드 주입
     process.stderr.write('코드 주입 중...\n');
-    const codeInjected = await page.evaluate((code) => {
-      const cmEl = document.querySelector('.CodeMirror');
-      if (!cmEl || !cmEl.CodeMirror) return false;
-      cmEl.CodeMirror.setValue(code);
-      return true;
-    }, editorCode);
-    process.stderr.write(`코드 주입: ${codeInjected ? '성공' : '실패 (기존 코드 유지)'}\n`);
+    const injectCode = async () => {
+      return page.evaluate((code) => {
+        const cmEls = Array.from(document.querySelectorAll('.CodeMirror'));
+        const activeEl = cmEls.find(el => {
+          let node = el;
+          while (node && node !== document.body) {
+            if (window.getComputedStyle(node).display === 'none') return false;
+            node = node.parentElement;
+          }
+          return true;
+        });
+        if (!activeEl || !activeEl.CodeMirror) return false;
+        const cm = activeEl.CodeMirror;
+        cm.setValue(code);
+        // React/Vue 상태 동기화를 위해 change 이벤트 트리거
+        cm.getDoc().markClean();
+        cm.refresh();
+        const textarea = activeEl.querySelector('textarea');
+        if (textarea) {
+          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
+          nativeInputValueSetter.call(textarea, code);
+          textarea.dispatchEvent(new Event('input', { bubbles: true }));
+          textarea.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        return cm.getValue().includes('solution');
+      }, editorCode);
+    };
+    const codeInjected = await injectCode();
+    process.stderr.write(`코드 주입: ${codeInjected ? '성공' : '실패'}\n`);
+    await new Promise(r => setTimeout(r, 300));
+
+    // 제출 버튼 클릭 직전 무조건 재주입 (에디터 리셋 방지)
+    await injectCode();
 
     // 제출 버튼 클릭
     process.stderr.write('제출 중...\n');
